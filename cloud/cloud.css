@@ -1,0 +1,113 @@
+/* Сброс */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- БОЛЬШОЙ ЭКРАН --- */
+body.big-screen {
+    width: 100vw;
+    height: 100vh;
+    background-color: #6B7CBF;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Заголовок */
+.cloud-header {
+    text-align: center;
+    padding-top: 40px;
+    z-index: 10;
+}
+
+.cloud-header h1 {
+    color: #ffffff;
+    font-size: 3vw;
+    font-weight: 900;
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* Контейнер для слов */
+.word-cloud-container {
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    gap: 15px 40px;
+    padding: 20px 5vw;
+    position: relative;
+    z-index: 5;
+}
+
+/* Стили для слов */
+.word-item {
+    color: #ffffff;
+    font-weight: bold;
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+    transform: scale(0.5);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+/* Размеры слов (зависят от частоты) */
+.size-1 { font-size: 5vw; color: #F2C94C; } /* Самые частые (желтые) */
+.size-2 { font-size: 3.5vw; color: #ffffff; }
+.size-3 { font-size: 2vw; color: #E45B32; } /* Редкие (оранжевые) */
+.size-4 { font-size: 1.2vw; color: #ffffff; opacity: 0.8; }
+
+/* QR-код в углу */
+.qr-corner {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 20;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.qr-corner img {
+    width: 150px;
+    height: 150px;
+    display: block;
+}
+
+.qr-corner p {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #6B7CBF;
+}
+
+/* Анимация появления */
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0.5); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Фоновые фигуры */
+.bg-shape { position: absolute; z-index: 1; }
+.shape-top-left {
+    top: -5%; left: -5%; width: 25vw; height: 25vw;
+    background-color: #E45B32; border-radius: 0 0 50% 0;
+}
+.shape-bottom-right {
+    bottom: -5%; right: -5%; width: 30vw; height: 20vw;
+    background-color: #F2C94C; border-radius: 50% 0 0 0;
+}

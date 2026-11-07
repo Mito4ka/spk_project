@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>СПК - Участник</title>
+    <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+
+    <!-- ЭКРАН 1: Ввод имени -->
+    <div id="screen-name" class="screen active">
+        <div class="decor-top"></div>
+        <div class="content">
+            <h2>Введите никнейм:</h2>
+            <input type="text" id="nicknameInput" placeholder="ты">
+            <button class="btn btn-blue" onclick="stepCookie()">Отправить</button>
+        </div>
+        <div class="decor-bottom"></div>
+    </div>
+
+    <!-- ЭКРАН 2: Cookie -->
+    <div id="screen-cookie" class="screen">
+        <div class="decor-top"></div>
+        <div class="content">
+            <h2>Вы успешно зарегистрировались!</h2>
+            <p style="font-size: 14px; margin-top: 10px;">Мы используем файлы cookie для обеспечения работы сайта.</p>
+            <button class="btn btn-blue" onclick="stepWait()" style="margin-top: 20px;">Принять</button>
+        </div>
+        <div class="decor-bottom"></div>
+    </div>
+
+    <!-- ЭКРАН 3: Экран ожидания (Скоро начнем) -->
+    <div id="screen-wait" class="screen">
+        <div class="decor-top"></div>
+        <div class="content">
+            <h2>Скоро начнём!</h2>
+            <p>Ждите запуска этапа модератором...</p>
+        </div>
+        <div class="decor-bottom"></div>
+    </div>
+
+    <!-- ЭКРАН 4: Ввод настроения (появится, когда модератор нажмет "Начать") -->
+    <div id="screen-mood" class="screen">
+        <div class="decor-top"></div>
+        <div class="content">
+            <h2>Опишите свое настроение<br><span class="subtitle">(максимум 20 символов):</span></h2>
+            <input type="text" id="moodInput" maxlength="20" placeholder="Cупер!">
+            <button class="btn btn-blue" onclick="submitMood()">Продолжить</button>
+        </div>
+        <div class="decor-bottom"></div>
+    </div>
+
+    <script>
+        // --- ЛОГИКА БЕЗ СЕРВЕРА (ТЕСТОВЫЕ ДАННЫЕ) ---
+        
+        let nickname = "";
+
+        // Шаг 1 -> Шаг 2
+        function stepCookie() {
+            nickname = document.getElementById('nicknameInput').value.trim();
+            if (!nickname) {
+                alert("Введите никнейм!");
+                return;
+            }
+            showScreen('screen-cookie');
+        }
+
+        // Шаг 2 -> Шаг 3
+        function stepWait() {
+            showScreen('screen-wait');
+            // Имитация: через 3 секунды модератор запускает этап
+            setTimeout(() => {
+                showScreen('screen-mood');
+            }, 3000);
+        }
+
+        function submitMood() {
+            alert("Слово отправлено! (В реальной игре оно уйдет модератору)");
+            document.getElementById('moodInput').value = '';
+        }
+
+        // Универсальная функция смены экрана
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+    </script>
+</body>
+</html>

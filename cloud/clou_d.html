@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>СПК - Облако слов</title>
+    <link rel="stylesheet" href="cloud.css">
+    <!-- Подключаем библиотеку для конфетти -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body class="big-screen">
+
+    <div class="screen-wrapper">
+        <!-- Фоновые фигуры -->
+        <div class="bg-shape shape-top-left"></div>
+        <div class="bg-shape shape-bottom-right"></div>
+
+        <!-- Заголовок вопроса -->
+        <header class="cloud-header">
+            <h1>Опишите свое настроение</h1>
+        </header>
+
+        <!-- Само облако слов -->
+        <main class="word-cloud-container" id="word-cloud">
+            <!-- Слова будут добавляться сюда через JavaScript -->
+        </main>
+
+        <!-- Маленький QR-код в углу -->
+        <div class="qr-corner">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://127.0.0.1:5500/mobile.html" alt="QR">
+            <p>Сканируй!</p>
+        </div>
+    </div>
+
+    <script src="cloud.js"></script>
+</body>
+</html>

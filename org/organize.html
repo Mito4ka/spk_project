@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель Организатора</title>
+    <style>
+        * { box-sizing: border-box; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #6B7CBF; color: white; height: 100vh; display: flex; justify-content: center; align-items: center; }
+        
+        .screen { display: none; width: 100%; max-width: 600px; padding: 20px; }
+        .screen.active { display: block; }
+        
+        .box { background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; backdrop-filter: blur(10px); }
+        h2 { margin-bottom: 20px; text-align: center; }
+        
+        input, textarea { width: 100%; padding: 15px; border-radius: 10px; border: none; margin-bottom: 15px; font-size: 16px; font-family: inherit;}
+        textarea { resize: vertical; min-height: 120px; }
+        
+        .btn { padding: 15px 30px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; background: #E45B32; color: white; width: 100%; font-size: 16px;}
+        .label { font-size: 14px; margin-bottom: 5px; opacity: 0.8; display: block;}
+    </style>
+</head>
+<body>
+
+    <!-- Вход -->
+    <div id="login-screen" class="screen active">
+        <div class="box">
+            <h2>Вход для организатора</h2>
+            <input type="password" id="pass" placeholder="Введите пароль (admin)">
+            <button class="btn" onclick="login()">Войти</button>
+        </div>
+    </div>
+
+    <!-- Панель -->
+    <div id="panel-screen" class="screen">
+        <div class="box">
+            <h2>Создание мероприятия</h2>
+            
+            <label class="label">Вопрос для облака слов:</label>
+            <input type="text" id="question" value="Опишите своё настроение">
+            
+            <label class="label">Чёрный список (слова через запятую):</label>
+            <textarea id="blacklist" placeholder="плохоеслово, мат, спам..."></textarea>
+            
+            <button class="btn" onclick="saveEvent()">Создать мероприятие</button>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const p = document.getElementById('pass').value;
+            if (p === "admin") {
+                document.getElementById('login-screen').classList.remove('active');
+                document.getElementById('panel-screen').classList.add('active');
+            } else {
+                alert("Неверный пароль!");
+            }
+        }
+
+        function saveEvent() {
+            // Имитация сохранения
+            alert("Мероприятие создано!\nВопрос: " + document.getElementById('question').value + "\nЧерный список сохранен.");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+/* Сброс стилей */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    background-color: #6B7CBF; /* Синий фон */
+    overflow: hidden; /* Запрещаем прокрутку */
+}
+
+/* --- ЭКРАНЫ --- */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none; /* Отключаем клики на скрытых экранах */
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+/* Активный экран */
+.screen.active {
+    opacity: 1;
+    pointer-events: all;
+    z-index: 10;
+}
+
+/* --- ДЕКОРАТИВНЫЕ ПЯТНА --- */
+.decor-top {
+    position: absolute;
+    top: -30px;
+    left: -30px;
+    width: 150px;
+    height: 150px;
+    background-color: #E45B32; /* Оранжевый */
+    border-radius: 0 0 100% 0;
+    z-index: 0;
+}
+
+.decor-bottom {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 120px;
+    height: 100px;
+    background-color: #F2C94C; /* Желтый */
+    border-radius: 100% 0 0 0;
+    z-index: 0;
+}
+
+/* --- КОНТЕНТ (Белая плашка по центру) --- */
+.content {
+    width: 90%;
+    max-width: 350px;
+    text-align: center;
+    z-index: 10;
+    padding: 30px 20px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
+    backdrop-filter: blur(10px); /* Размытие фона */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+h2 {
+    color: #ffffff;
+    font-size: 22px;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 16px;
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+p {
+    color: #ffffff;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    margin-bottom: 20px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+}
+
+/* --- КНОПКИ --- */
+.btn {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s;
+    margin-bottom: 10px;
+}
+
+.btn:active { transform: scale(0.98); }
+.btn-blue { background-color: #4A5B99; color: white; }
+.btn-orange { background-color: #E45B32; color: white; }
+
+/* --- ПАНЕЛЬ ЭМОДЗИ --- */
+.emoji-add-panel {
+    display: flex;
+    justify-content: space-around;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.emoji-add-panel span {
+    font-size: 26px;
+    cursor: pointer;
+    transition: transform 0.1s;
+    user-select: none; /* Чтобы текст не выделялся при клике */
+}
+
+.emoji-add-panel span:active {
+    transform: scale(1.3);
+}
+
+/* --- ИКОНКИ (Галочка, Запрет, Связь) --- */
+.icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+}

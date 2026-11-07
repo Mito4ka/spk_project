@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Панель Модератора</title>
+    <style>
+        * { box-sizing: border-box; font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        body { background-color: #6B7CBF; color: white; height: 100vh; display: flex; justify-content: center; align-items: center; }
+        
+        /* Экраны */
+        .screen { display: none; width: 100%; max-width: 800px; padding: 20px; }
+        .screen.active { display: block; }
+        
+        /* Вход */
+        .login-box { background: rgba(255,255,255,0.1); padding: 40px; border-radius: 20px; text-align: center; backdrop-filter: blur(10px); }
+        input { padding: 15px; width: 100%; border-radius: 10px; border: none; margin-bottom: 15px; font-size: 16px; }
+        .btn { padding: 15px 30px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; background: #E45B32; color: white; width: 100%; }
+        
+        /* Панель */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px;}
+        .counter { font-size: 24px; font-weight: bold; background: #F2C94C; color: #333; padding: 5px 15px; border-radius: 20px;}
+        .user-list { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 20px; list-style: none; }
+        .user-list li { padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+
+    <!-- Вход -->
+    <div id="login-screen" class="screen active">
+        <div class="login-box">
+            <h2 style="margin-bottom: 20px;">Вход для модератора</h2>
+            <input type="password" id="pass" placeholder="Введите пароль (1234)">
+            <button class="btn" onclick="login()">Войти</button>
+        </div>
+    </div>
+
+    <!-- Панель -->
+    <div id="panel-screen" class="screen">
+        <div class="header">
+            <h2>Панель управления</h2>
+            <div class="counter">Подключено: <span id="count">3</span></div>
+        </div>
+        <ul class="user-list" id="users">
+            <!-- Список заполнится через JS -->
+        </ul>
+    </div>
+
+    <script>
+        // Тестовые данные (без сервера)
+        const testUsers = ["Арламунтий Михалыч", "Мария Ивановна", "Петр Первый"];
+
+        function login() {
+            const p = document.getElementById('pass').value;
+            if (p === "1234") {
+                document.getElementById('login-screen').classList.remove('active');
+                document.getElementById('panel-screen').classList.add('active');
+                renderUsers();
+            } else {
+                alert("Неверный пароль!");
+            }
+        }
+
+        function renderUsers() {
+            const list = document.getElementById('users');
+            list.innerHTML = '';
+            testUsers.forEach(user => {
+                const li = document.createElement('li');
+                li.innerHTML = `<span>${user}</span> <span style="color: #5cb85c;">Онлайн</span>`;
+                list.appendChild(li);
+            });
+            document.getElementById('count').textContent = testUsers.length;
+        }
+    </script>
+</body>
+</html>
