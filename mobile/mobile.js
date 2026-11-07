@@ -1,21 +1,36 @@
 let answerCount = 0;
 const MAX_ANSWERS = 3;
+let nickname = "";
 
+// Функция смены экранов (ваша родная)
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
 }
 
-function startGame() {
-    const nickname = document.getElementById('nicknameInput').value.trim();
+// Шаг 1 -> Шаг 2
+function stepCookie() {
+    nickname = document.getElementById('nicknameInput').value.trim();
     if (!nickname) {
         alert("Введите никнейм!");
         return;
     }
-    // Переход к вводу настроения
-    showScreen('screen-mood');
+    
+    // СОХРАНЯЕМ ИМЯ В ПАМЯТЬ
+    localStorage.setItem('spk_user', nickname);
+    
+    showScreen('screen-cookie');
 }
 
+// Шаг 2 -> Шаг 3
+function stepWait() {
+    showScreen('screen-wait');
+    setTimeout(() => {
+        showScreen('screen-mood');
+    }, 3000);
+}
+
+// Отправка слова
 function submitMood() {
     const moodInput = document.getElementById('moodInput');
     const mood = moodInput.value.trim();
@@ -25,14 +40,25 @@ function submitMood() {
         return;
     }
 
-    // Имитация отправки на сервер
-    console.log("Отправлено слово:", mood);
+    // 1. Получаем текущие слова из памяти (или создаем пустой список)
+    let allWords = JSON.parse(localStorage.getItem('spk_words') || "[]");
     
-    // Очищаем поле
+    // 2. Добавляем новое слово
+    allWords.push({
+        text: mood,
+        author: nickname,
+        status: "pending", // Ждет проверки модератора
+        id: Date.now() // Уникальный ID
+    });
+    
+    // 3. Сохраняем обратно
+    localStorage.setItem('spk_words', JSON.stringify(allWords));
+
+    // Очищаем поле и считаем лимит
     moodInput.value = '';
     answerCount++;
+    document.getElementById('limit-text').textContent = `Осталось попыток: ${MAX_ANSWERS - answerCount}`;
 
-    // Проверяем лимит
     if (answerCount >= MAX_ANSWERS) {
         showScreen('screen-limit');
     } else {
@@ -40,16 +66,12 @@ function submitMood() {
     }
 }
 
+// Отправка реакций (просто алерт)
 function sendReaction(emoji) {
-    // Имитация отправки реакции
-    console.log("Отправлена реакция:", emoji);
-    // Здесь в будущем будет код для отправки конфетти на большой экран
+    alert(`Вы отправили реакцию: ${emoji}`);
 }
 
-// Проверка на потерю связи (для демонстрации экрана "Нет связи")
+// Обработка потери связи
 window.addEventListener('offline', () => {
-    showScreen('screen-offline');
-});
-window.addEventListener('online', () => {
-    showScreen('screen-mood');
+    alert("Нет связи! Перезагрузите страницу.");
 });

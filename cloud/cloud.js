@@ -1,49 +1,42 @@
-// База слов (имитация)
-// weight: 1 - самое частое (крупное), 4 - редкое (мелкое)
-const wordsData = [
-    { text: "Отлично", weight: 1 },
-    { text: "Круто", weight: 1 },
-    { text: "Супер", weight: 2 },
-    { text: "Весело", weight: 2 },
-    { text: "Интересно", weight: 2 },
-    { text: "Познавательно", weight: 3 },
-    { text: "Класс", weight: 3 },
-    { text: "Хорошо", weight: 3 },
-    { text: "Здорово", weight: 4 },
-    { text: "Ура", weight: 4 },
-    { text: "Мяу", weight: 4 }
-];
-
 const cloudContainer = document.getElementById('word-cloud');
 
-function renderWords() {
-    cloudContainer.innerHTML = '';
-    
-    // Перемешиваем для случайного порядка
-    const shuffled = wordsData.sort(() => 0.5 - Math.random());
+function updateCloud() {
+    // Читаем одобренные слова из памяти
+    let words = JSON.parse(localStorage.getItem('spk_words') || "[]");
+    let approved = words.filter(w => w.status === "approved");
 
-    shuffled.forEach((word, index) => {
+    cloudContainer.innerHTML = '';
+
+    // Считаем частоту слов (чтобы делать их больше)
+    let counts = {};
+    approved.forEach(w => {
+        let text = w.text.toLowerCase();
+        counts[text] = (counts[text] || 0) + 1;
+    });
+
+    // Превращаем в массив и сортируем по частоте
+    let sortedWords = Object.keys(counts).map(text => {
+        return { text: text, count: counts[text] };
+    }).sort((a, b) => b.count - a.count);
+
+    // Рисуем слова
+    sortedWords.forEach((word, index) => {
         const span = document.createElement('span');
-        span.className = `word-item size-${word.weight}`;
-        span.textContent = word.text;
         
-        // Задержка появления для плавности
+        // Определяем размер в зависимости от частоты
+        let sizeClass = "size-4";
+        if (word.count > 5) sizeClass = "size-1";
+        else if (word.count > 3) sizeClass = "size-2";
+        else if (word.count > 1) sizeClass = "size-3";
+
+        span.className = `word-item ${sizeClass}`;
+        span.textContent = word.text;
         span.style.animationDelay = `${index * 0.1}s`;
         
         cloudContainer.appendChild(span);
     });
 }
 
-// Запуск
-renderWords();
-
-// --- ЭФФЕКТ КОНФЕТТИ ---
-// При клике в любом месте экрана (для теста)
-document.body.addEventListener('click', function(e) {
-    confetti({
-        particleCount: 50,
-        spread: 70,
-        origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
-        colors: ['#E45B32', '#F2C94C', '#ffffff', '#4A5B99']
-    });
-});
+// Обновляем каждые 2 секунды
+setInterval(updateCloud, 2000);
+updateCloud(); // Первый запуск

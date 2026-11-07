@@ -15,23 +15,36 @@
         <div class="bg-shape shape-top-left"></div>
         <div class="bg-shape shape-bottom-right"></div>
 
-        <!-- Заголовок вопроса -->
+        <!-- Заголовок вопроса (можно скрыть, если не нужен) -->
         <header class="cloud-header">
             <h1>Опишите свое настроение</h1>
         </header>
 
-        <!-- Само облако слов -->
+        <!-- Само облако слов (тут ID должен быть word-cloud) -->
         <main class="word-cloud-container" id="word-cloud">
             <!-- Слова будут добавляться сюда через JavaScript -->
         </main>
 
-        <!-- Маленький QR-код в углу -->
+        <!-- QR-код в углу (можно убрать, если он не нужен на этом экране) -->
         <div class="qr-corner">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://127.0.0.1:5500/mobile.html" alt="QR">
             <p>Сканируй!</p>
         </div>
     </div>
 
+    <!-- Твой скрипт конфетти -->
+    <script>
+        document.body.addEventListener('click', function(e) {
+            confetti({
+                particleCount: 50,
+                spread: 70,
+                origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
+                colors: ['#E85D35', '#F2C94C', '#ffffff', '#4A5C9A']
+            });
+        });
+    </script>
+    
+    <!-- Подключаем логику облака (наш новый cloud.js) -->
     <script src="cloud.js"></script>
 </body>
 </html>
