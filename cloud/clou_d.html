@@ -5,34 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>СПК - Облако слов</title>
     <link rel="stylesheet" href="cloud.css">
-    <!-- Подключаем библиотеку для конфетти -->
+    <!-- библиотекa для конфетти -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body class="big-screen">
 
     <div class="screen-wrapper">
-        <!-- Фоновые фигуры -->
+        
         <div class="bg-shape shape-top-left"></div>
         <div class="bg-shape shape-bottom-right"></div>
 
-        <!-- Заголовок вопроса (можно скрыть, если не нужен) -->
+        
         <header class="cloud-header">
             <h1>Опишите свое настроение</h1>
         </header>
 
-        <!-- Само облако слов (тут ID должен быть word-cloud) -->
+       
         <main class="word-cloud-container" id="word-cloud">
             <!-- Слова будут добавляться сюда через JavaScript -->
         </main>
 
-        <!-- QR-код в углу (можно убрать, если он не нужен на этом экране) -->
+        <!-- QR-код  -->
         <div class="qr-corner">
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://127.0.0.1:5500/mobile.html" alt="QR">
             <p>Сканируй!</p>
         </div>
     </div>
 
-    <!-- Твой скрипт конфетти -->
+    <!-- конфетти -->
     <script>
         document.body.addEventListener('click', function(e) {
             confetti({
@@ -44,7 +44,7 @@
         });
     </script>
     
-    <!-- Подключаем логику облака (наш новый cloud.js) -->
+    
     <script src="cloud.js"></script>
 </body>
 </html>
