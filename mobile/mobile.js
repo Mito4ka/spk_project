@@ -2,13 +2,13 @@ let answerCount = 0;
 const MAX_ANSWERS = 3;
 let nickname = "";
 
-// Функция смены экранов (ваша родная)
+
 function showScreen(screenId) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
 }
 
-// Шаг 1 -> Шаг 2
+
 function stepCookie() {
     nickname = document.getElementById('nicknameInput').value.trim();
     if (!nickname) {
@@ -16,13 +16,13 @@ function stepCookie() {
         return;
     }
     
-    // СОХРАНЯЕМ ИМЯ В ПАМЯТЬ
+
     localStorage.setItem('spk_user', nickname);
     
     showScreen('screen-cookie');
 }
 
-// Шаг 2 -> Шаг 3
+
 function stepWait() {
     showScreen('screen-wait');
     setTimeout(() => {
@@ -51,7 +51,7 @@ function submitMood() {
         id: Date.now() // Уникальный ID
     });
     
-    // 3. Сохраняем обратно
+
     localStorage.setItem('spk_words', JSON.stringify(allWords));
 
     // Очищаем поле и считаем лимит

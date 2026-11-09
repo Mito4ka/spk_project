@@ -1,13 +1,13 @@
 const cloudContainer = document.getElementById('word-cloud');
 
 function updateCloud() {
-    // Читаем одобренные слова из памяти
+    
     let words = JSON.parse(localStorage.getItem('spk_words') || "[]");
     let approved = words.filter(w => w.status === "approved");
 
     cloudContainer.innerHTML = '';
 
-    // Считаем частоту слов (чтобы делать их больше)
+    
     let counts = {};
     approved.forEach(w => {
         let text = w.text.toLowerCase();

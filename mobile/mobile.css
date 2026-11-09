@@ -1,4 +1,4 @@
-/* Сброс стилей */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -7,8 +7,8 @@
 }
 
 body {
-    background-color: #6B7CBF; /* Синий фон */
-    overflow: hidden; /* Запрещаем прокрутку */
+    background-color: #6B7CBF; 
+    overflow: hidden; 
 }
 
 /* --- ЭКРАНЫ --- */
@@ -23,7 +23,7 @@ body {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    pointer-events: none; /* Отключаем клики на скрытых экранах */
+    pointer-events: none; 
     transition: opacity 0.3s ease;
     z-index: 1;
 }
@@ -35,14 +35,14 @@ body {
     z-index: 10;
 }
 
-/* --- ДЕКОРАТИВНЫЕ ПЯТНА --- */
+
 .decor-top {
     position: absolute;
     top: -30px;
     left: -30px;
     width: 150px;
     height: 150px;
-    background-color: #E45B32; /* Оранжевый */
+    background-color: #E45B32; 
     border-radius: 0 0 100% 0;
     z-index: 0;
 }
@@ -53,12 +53,12 @@ body {
     right: -30px;
     width: 120px;
     height: 100px;
-    background-color: #F2C94C; /* Желтый */
+    background-color: #F2C94C; 
     border-radius: 100% 0 0 0;
     z-index: 0;
 }
 
-/* --- КОНТЕНТ (Белая плашка по центру) --- */
+
 .content {
     width: 90%;
     max-width: 350px;
@@ -66,8 +66,8 @@ body {
     z-index: 10;
     padding: 30px 20px;
     border-radius: 20px;
-    background-color: rgba(255, 255, 255, 0.1); /* Полупрозрачный белый */
-    backdrop-filter: blur(10px); /* Размытие фона */
+    background-color: rgba(255, 255, 255, 0.1); 
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
@@ -103,7 +103,7 @@ input {
     color: #333;
 }
 
-/* --- КНОПКИ --- */
+
 .btn {
     width: 100%;
     padding: 15px;
@@ -134,7 +134,7 @@ input {
     font-size: 26px;
     cursor: pointer;
     transition: transform 0.1s;
-    user-select: none; /* Чтобы текст не выделялся при клике */
+    user-select: none; 
 }
 
 .emoji-add-panel span:active {

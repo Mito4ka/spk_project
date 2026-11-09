@@ -56,7 +56,7 @@
         
         let nickname = "";
 
-        // Шаг 1 -> Шаг 2
+       
         function stepCookie() {
             nickname = document.getElementById('nicknameInput').value.trim();
             if (!nickname) {
@@ -66,10 +66,9 @@
             showScreen('screen-cookie');
         }
 
-        // Шаг 2 -> Шаг 3
+      
         function stepWait() {
             showScreen('screen-wait');
-            // Имитация: через 3 секунды модератор запускает этап
             setTimeout(() => {
                 showScreen('screen-mood');
             }, 3000);
@@ -80,7 +79,6 @@
             document.getElementById('moodInput').value = '';
         }
 
-        // Универсальная функция смены экрана
         function showScreen(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.getElementById(screenId).classList.add('active');
